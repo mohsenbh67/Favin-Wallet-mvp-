@@ -1,0 +1,645 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Favin Wallet",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/all-transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get list of all Transactions",
+                "description": "Returns list of Transactions",
+                "operationId": "getAllTransactionsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\TransactionCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user-transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get list of all User Transactions",
+                "description": "Returns list of User Transactions",
+                "operationId": "getAllUserTransactionsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\TransactionCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "No Transactions Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/my-transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get list of all My Transactions",
+                "description": "Returns list of My Transactions",
+                "operationId": "getMyTransactionsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\TransactionCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "No Transactions Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/wallet-transactions/{wallet_id}": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get list of all wallet Transactions",
+                "description": "Returns list of wallet Transactions",
+                "operationId": "getWalletTransactionsList",
+                "parameters": [
+                    {
+                        "name": "wallet_id",
+                        "in": "path",
+                        "description": "Wallet id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\TransactionCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "No Transactions Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/transactions": {
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Store new Transaction",
+                "description": "Returns Transaction data",
+                "operationId": "storeTransactions",
+                "requestBody": {
+                    "description": "Pass Transaction credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "status",
+                                    "amount",
+                                    "published_at"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "new wallet"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "deposit"
+                                    },
+                                    "amount": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1000"
+                                    },
+                                    "published_at": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "2023-01-01 11:00:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\TransactionResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/all-users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get list of all User",
+                "description": "Returns list of Users",
+                "operationId": "getAllUsersList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\UserCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/edit-users/{user_id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update existing User",
+                "description": "Returns updated User data",
+                "operationId": "updateUsers",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/all-wallets": {
+            "get": {
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Get list of all Wallets",
+                "description": "Returns list of Wallets",
+                "operationId": "getAllWalletsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\WalletCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user-wallets": {
+            "get": {
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Get list of all User Wallets",
+                "description": "Returns list of User Wallets",
+                "operationId": "getAllUserWalletsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\WalletCollection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "No Wallets Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/wallets": {
+            "post": {
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Store new Wallet",
+                "description": "Returns Wallet data",
+                "operationId": "storeWallets",
+                "requestBody": {
+                    "description": "Pass Wallet credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "status"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "new wallet"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "new wallet"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\WalletResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login User",
+                "description": "Returns User data",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "description": "Pass User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "1234@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "paswword",
+                                        "example": "123456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register User",
+                "description": "Returns User data",
+                "operationId": "registerUser",
+                "requestBody": {
+                    "description": "Pass User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "ali"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "ali"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "1234@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "paswword",
+                                        "example": "123456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\UserResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "logout User",
+                "description": "Returns User data",
+                "operationId": "logoutUser",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh User Token",
+                "description": "Returns User token",
+                "operationId": "refreshUserToken",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "App\\Http\\Resources\\UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "bearer",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
